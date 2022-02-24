@@ -31,9 +31,7 @@ class ShopMenu extends StatelessWidget {
           ),
         ],
       ),
-      drawer: Drawer(
-        child: ShopDrawer()
-      ),
+      drawer: ShopDrawer(),
     );
   }
 }

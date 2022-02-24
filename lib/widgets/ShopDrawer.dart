@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop_app/pages/orders.dart';
 import 'package:shop_app/pages/productManager.dart';
 
 class ShopDrawer extends StatelessWidget {
@@ -10,28 +11,29 @@ class ShopDrawer extends StatelessWidget {
       ListTile(
         leading: Icon(Icons.shop),
         title: Text("Shop"),
-        onTap: () => Navigator.of(context).pushNamed("/"),
+        onTap: () => Navigator.of(context).popAndPushNamed("/"),
       ),
       ListTile(
         leading: Icon(Icons.credit_card),
         title: Text('Orders'),
-        onTap: () => Navigator.of(context).pushNamed("/orders"),
+        onTap: () => Navigator.of(context).popAndPushNamed(OrderPage.route),
       ),
       ListTile(
         leading: Icon(Icons.edit),
         title: Text('Manage Producs'),
-        onTap: () =>
-            Navigator.of(context).pushNamed(ProductManagerPage.route),
+        onTap: () => Navigator.of(context).popAndPushNamed(ProductManagerPage.route),
       )
     ];
 
-    return ListView.separated(
-        itemBuilder: (context, index) {
-          return drawerContent[index];
-        },
-        separatorBuilder: (context, index) => Divider(
-              color: Colors.grey,
-            ),
-        itemCount: drawerContent.length);
+    return Drawer(
+      child: ListView.separated(
+          itemBuilder: (context, index) {
+            return drawerContent[index];
+          },
+          separatorBuilder: (context, index) => Divider(
+                color: Colors.grey,
+              ),
+          itemCount: drawerContent.length),
+    );
   }
 }
