@@ -1,14 +1,13 @@
-import 'dart:ui';
-
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:shop_app/widgets/ShopDrawer.dart';
+import 'package:shop_app/widgets/productView.dart';
 import 'package:shop_app/widgets/shopItem.dart';
 
-class ShopMenu extends StatelessWidget {
+class ShopPage extends StatelessWidget {
   List<ShopItem> shoppingCart = [];
 
-  ShopMenu({Key? key}) : super(key: key);
+  ShopPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +31,7 @@ class ShopMenu extends StatelessWidget {
         ],
       ),
       drawer: ShopDrawer(),
+      body: ProductView(),
     );
   }
 }

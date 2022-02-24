@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shop_app/pages/orders.dart';
 import 'package:shop_app/pages/productManager.dart';
-import 'package:shop_app/widgets/shopMenu.dart';
+import 'package:shop_app/pages/shopPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/': (context) => ShopMenu(),
+        '/': (context) => ShopPage(),
         OrderPage.route: (context) => OrderPage(),
         ProductManagerPage.route: (context) => ProductManagerPage(),
       },
