@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/providers/products.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/providers/productManager.dart';
 
 class ProductView extends StatefulWidget {
   ProductView({Key? key}) : super(key: key);
@@ -9,46 +10,58 @@ class ProductView extends StatefulWidget {
 }
 
 class _ProductViewState extends State<ProductView> {
-  final ProductManager _productManager = ProductManager();
+
 
   @override
   Widget build(BuildContext context) {
+    final ProductManager productManager = Provider.of<ProductManager>(context);
     return GridView.builder(
-      itemCount: _productManager.getProducts().length,
+      itemCount: productManager.getProducts().length,
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
         return GridTile(
-          child: Image.network(_productManager.getProducts()[index].imageUrl),
-          footer: GridTileBar(
-            leading: _productManager.getProducts()[index].isFavorite
-                ? IconButton(
-                    icon: Icon(Icons.favorite),
-                    onPressed: () {
-                      setState(() {
-                        _productManager.setProductAsFavorite(
-                            _productManager.getProducts()[index],
-                            favorite: false);
-                      });
-                    },
-                  )
-                : IconButton(
-                    icon: Icon(Icons.favorite_border),
-                    onPressed: () {
-                      setState(() {
-                        _productManager.setProductAsFavorite(
-                            _productManager.getProducts()[index]);
-                      });
-                    },
-                  ),
-            backgroundColor: Colors.grey,
-            title: Text(
-              _productManager.getProducts()[index].name,
-              style: TextStyle(color: Colors.green),
+          child: GestureDetector(
+            child: Image.network(
+              productManager.getProducts()[index].imageUrl,
             ),
-            subtitle: Text(
-              _productManager.getProducts()[index].price.toString(),
-              style: TextStyle(color: Colors.green),
+            //TODO make that working
+            //onTap: () {() => Navigator.of(context).pushNamed(_productManager.getProducts()[index].path)},
+            onTap: () {},
+          ),
+          footer: Opacity(
+            opacity: 0.75,
+            child: GridTileBar(
+              leading: productManager.getProducts()[index].isFavorite
+                  ? IconButton(
+                      icon: Icon(Icons.favorite),
+                      onPressed: () {
+                        setState(() {
+                          productManager.setProductAsFavorite(
+                              productManager.getProducts()[index],
+                              favorite: false);
+                        });
+                      },
+                    )
+                  : IconButton(
+                      icon: Icon(Icons.favorite_border),
+                      onPressed: () {
+                        setState(() {
+                          productManager.setProductAsFavorite(
+                              productManager.getProducts()[index]);
+                        });
+                      },
+                    ),
+              backgroundColor: Colors.black,
+              title: Text(
+                productManager.getProducts()[index].name,
+              ),
+              trailing: IconButton(
+                icon: Icon(Icons.shopping_cart),
+                onPressed: () {
+                  //todo add to shopping cart
+                },
+              ),
             ),
           ),
         );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shop_app/pages/orders.dart';
-import 'package:shop_app/pages/productManager.dart';
+import 'package:provider/provider.dart';
+import 'package:shop_app/pages/orderPage.dart';
+import 'package:shop_app/pages/productManagerPage.dart';
 import 'package:shop_app/pages/shopPage.dart';
+import 'package:shop_app/providers/productManager.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,13 +14,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      initialRoute: '/',
-      routes: {
-        '/': (context) => ShopPage(),
-        OrderPage.route: (context) => OrderPage(),
-        ProductManagerPage.route: (context) => ProductManagerPage(),
+    return ChangeNotifierProvider(
+      create: (context) {
+        return ProductManager();
       },
+      child: MaterialApp(
+        initialRoute: '/',
+        routes: {
+          '/': (context) => ShopPage(),
+          OrderPage.route: (context) => OrderPage(),
+          ProductManagerPage.route: (context) => ProductManagerPage(),
+        },
+      ),
     );
 
   }
