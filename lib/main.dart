@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/pages/orderPage.dart';
+import 'package:shop_app/pages/productAddPage.dart';
 import 'package:shop_app/pages/productManagerPage.dart';
 import 'package:shop_app/pages/shopPage.dart';
 import 'package:shop_app/providers/productManager.dart';
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => ShopPage(),
           OrderPage.route: (context) => OrderPage(),
           ProductManagerPage.route: (context) => ProductManagerPage(),
+          ProductAddPage.route: (context) => ProductAddPage(),
         },
       ),
     );

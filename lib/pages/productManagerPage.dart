@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop_app/pages/productAddPage.dart';
 import 'package:shop_app/providers/productManager.dart';
 import 'package:shop_app/widgets/ShopDrawer.dart';
 import 'package:shop_app/widgets/productManagerListTile.dart';
@@ -18,7 +19,9 @@ class ProductManagerPage extends StatelessWidget {
         title: Text("Products"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(ProductAddPage.route);
+            },
             icon: Icon(Icons.add),
           )
         ],
