@@ -5,9 +5,8 @@ import 'package:shop_app/domain/shoppingCartItem.dart';
 class ShoppingCartManager with ChangeNotifier {
   final List<ShoppingCartItem> _items = [];
 
-  addToCart(Product product) {
-    var index =
-    _items.indexWhere((element) => element.product == product);
+  void addToCart(Product product, {int? count}) {
+    var index = _items.indexWhere((element) => element.product == product);
 
     if (index == -1) {
       _items.add(ShoppingCartItem(product, 1));
@@ -18,9 +17,21 @@ class ShoppingCartManager with ChangeNotifier {
     notifyListeners();
   }
 
-   removeFromCart(Product product) {
-    var index =
-    _items.indexWhere((element) => element.product == product);
+  ShoppingCartItem? removeAllFromCart(Product product) {
+
+    int index = _items.indexWhere((element) => element.product == product);
+    ShoppingCartItem? item;
+
+    if (index != -1) {
+      item = _items.removeAt(index);
+    }
+    notifyListeners();
+
+    return item;
+  }
+
+  void removeOneFromCart(Product product) {
+    var index = _items.indexWhere((element) => element.product == product);
 
     if (index != -1) {
       var item = _items.removeAt(index);
@@ -41,6 +52,4 @@ class ShoppingCartManager with ChangeNotifier {
   List<ShoppingCartItem> getItems() {
     return [..._items];
   }
-
-
 }

@@ -12,6 +12,9 @@ class ShoppingCart extends StatelessWidget {
   Widget build(BuildContext context) {
     final ShoppingCartManager shoppingCartManager =
         Provider.of<ShoppingCartManager>(context);
+
+    final shoppingCart = shoppingCartManager.getItems();
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Cart"),
@@ -44,7 +47,13 @@ class ShoppingCart extends StatelessWidget {
             itemCount: shoppingCartManager.getItems().length,
             itemBuilder: (context, index) {
               return ListTile(
-                title: Text("HAHA"),
+                title: Text(shoppingCart[index].product.name),
+                subtitle: Text("€" + (shoppingCart[index].product.price *
+                        shoppingCart[index].count)
+                    .toString()),
+                leading: CircleAvatar(
+                  child: Text("€" + shoppingCart[index].product.price.toString(), style: TextStyle(fontSize: 15), maxLines: 1,),
+                ),
               );
             },
           )

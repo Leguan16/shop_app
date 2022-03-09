@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/domain/product.dart';
+import 'package:shop_app/domain/shoppingCartItem.dart';
 import 'package:shop_app/providers/productManager.dart';
+import 'package:shop_app/providers/shoppingCartManager.dart';
 
 class ProductAddPage extends StatefulWidget {
   const ProductAddPage({Key? key}) : super(key: key);
@@ -28,7 +30,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
     try {
       product = ModalRoute.of(context)!.settings.arguments as Product;
       //if(product != null) {
-        imageURL = product!.imageUrl;
+      imageURL = product!.imageUrl;
       //}
     } on Error {
       product = null;
@@ -117,13 +119,29 @@ class _ProductAddPageState extends State<ProductAddPage> {
   submit() {
     ProductManager productManager =
         Provider.of<ProductManager>(context, listen: false);
+
+    ShoppingCartManager shoppingCartManager =
+        Provider.of<ShoppingCartManager>(context, listen: false);
+
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
-      if (productManager.getProducts().contains(product)) {
-        productManager.removeProduct(product!);
+
+      Product newProduct = Product(title, price, imageURL, description);
+
+      productManager.addProduct(newProduct);
+
+      if (product != null) {
+        if (productManager.getProducts().contains(product)) {
+          productManager.removeProduct(product!);
+        }
+        ShoppingCartItem? item =
+            shoppingCartManager.removeAllFromCart(product!);
+
+        if (item != null) {
+          shoppingCartManager.addToCart(newProduct, count: item.count);
+        }
       }
 
-      productManager.addProduct(Product(title, price, imageURL, description));
       Navigator.of(context).pop();
     }
   }
