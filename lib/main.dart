@@ -28,12 +28,12 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         initialRoute: '/',
         routes: {
-          '/': (_) => ShopPage(),
-          OrderPage.route: (_) => OrderPage(),
-          ProductManagerPage.route: (_) => ProductManagerPage(),
-          ProductAddPage.route: (_) => ProductAddPage(),
-          ShopItem.route: (_) => ShopItem(),
-          ShoppingCart.route: (_) => ShoppingCart(),
+          '/': (_) => const ShopPage(),
+          OrderPage.route: (_) => const OrderPage(),
+          ProductManagerPage.route: (_) => const ProductManagerPage(),
+          ProductAddPage.route: (_) => const ProductAddPage(),
+          ShopItem.route: (_) => const ShopItem(),
+          ShoppingCart.route: (_) => const ShoppingCart(),
         },
       ),
     );

@@ -38,8 +38,8 @@ class _ProductAddPageState extends State<ProductAddPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Product"),
-        actions: [IconButton(onPressed: submit, icon: Icon(Icons.save))],
+        title: const Text("Edit Product"),
+        actions: [IconButton(onPressed: submit, icon: const Icon(Icons.save))],
       ),
       body: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -49,7 +49,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
             TextFormField(
               initialValue: product == null ? "" : product?.name,
               validator: validateText,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Enter a title",
                 labelText: "Title",
               ),
@@ -58,7 +58,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
             TextFormField(
               initialValue: product == null ? "" : product?.price.toString(),
               validator: validatePrice,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Enter a price",
                 labelText: "Price",
               ),
@@ -67,7 +67,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
             TextFormField(
               initialValue: product == null ? "" : product?.description,
               validator: validateText,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Enter a description",
                 labelText: "Description",
               ),
@@ -83,15 +83,15 @@ class _ProductAddPageState extends State<ProductAddPage> {
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey)),
                         child: imageURL.isEmpty
-                            ? Text("enter img URL")
+                            ? const Text("enter img URL")
                             : Image.network(
                                 imageURL,
                                 errorBuilder: (context, error, stackTrace) =>
-                                    Text("Invalid URL"),
+                                    const Text("Invalid URL"),
                               )),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Expanded(
@@ -101,7 +101,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
                     onChanged: (value) => setState(() {
                       imageURL = value;
                     }),
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Enter a image URL",
                       labelText: "Image URL",
                     ),

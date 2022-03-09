@@ -21,38 +21,41 @@ class ShoppingCart extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Cart"),
+        title: const Text("Cart"),
       ),
       body: Column(
         children: [
           Card(
-            elevation: 12,
-            child: Row(
-              children: [
-                Text("Total", style: TextStyle(fontSize: 20),),
-                SizedBox(
-                  width: 150,
+            elevation: 5,
+            child: ListTile(
+                leading: const Text(
+                  "Total",
+                  style: TextStyle(fontSize: 20),
                 ),
-                Badge(
-                  toAnimate: false,
-                  shape: BadgeShape.square,
-                  badgeColor: Colors.blue,
-                  borderRadius: BorderRadius.circular(15),
-                  badgeContent: Text( "€" +
-                      shoppingCartManager.getTotalPrice().toString(),
-                      style: TextStyle(color: Colors.white, fontSize: 15)),
-                ),
-                TextButton(
-                    onPressed: () {
-                      if (shoppingCart.isNotEmpty) {
-                        orderManager
-                            .addOrder(Order(DateTime.now(), shoppingCart));
-                        shoppingCartManager.clear();
-                      }
-                    },
-                    child: Text("ORDER NOW", style: TextStyle(fontSize: 15)))
-              ],
-            ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Badge(
+                      toAnimate: false,
+                      shape: BadgeShape.square,
+                      badgeColor: Colors.blue,
+                      borderRadius: BorderRadius.circular(15),
+                      badgeContent: Text(
+                          "€" + shoppingCartManager.getTotalPrice().toString(),
+                          style: const TextStyle(color: Colors.white, fontSize: 15)),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          if (shoppingCart.isNotEmpty) {
+                            orderManager
+                                .addOrder(Order(DateTime.now(), shoppingCart));
+                            shoppingCartManager.clear();
+                          }
+                        },
+                        child:
+                            const Text("ORDER NOW", style: TextStyle(fontSize: 15))),
+                  ],
+                )),
           ),
           ListView.builder(
             shrinkWrap: true,
@@ -64,20 +67,23 @@ class ShoppingCart extends StatelessWidget {
                     context: context,
                     builder: (context) {
                       return AlertDialog(
-                        title: Text("Are you sure?"),
-                        content: Text("Remove item?"),
+                        title: const Text("Are you sure?"),
+                        content: const Text("Remove item?"),
                         actions: [
                           TextButton(
                             onPressed: () {
                               Navigator.of(context).pop(false);
                             },
-                            child: Text("No"),
+                            child: const Text("No"),
                           ),
-                          TextButton(onPressed: () {
-                            shoppingCartManager
-                                .removeAllFromCart(shoppingCart[index].product);
-                            Navigator.of(context).pop(true);
-                          }, child: Text("Yes"),),
+                          TextButton(
+                            onPressed: () {
+                              shoppingCartManager.removeAllFromCart(
+                                  shoppingCart[index].product);
+                              Navigator.of(context).pop(true);
+                            },
+                            child: const Text("Yes"),
+                          ),
                         ],
                       );
                     },
@@ -86,26 +92,25 @@ class ShoppingCart extends StatelessWidget {
                 key: UniqueKey(),
                 child: ListTile(
                   title: Text(shoppingCart[index].product.name),
-                  subtitle: Text("€" +
+                  subtitle: Text("Total: €" +
                       (shoppingCart[index].product.price *
                               shoppingCart[index].count)
                           .toString()),
                   leading: CircleAvatar(
                     child: Text(
                       "€" + shoppingCart[index].product.price.toString(),
-                      style: TextStyle(fontSize: 15),
+                      style: const TextStyle(fontSize: 15),
                       maxLines: 1,
                     ),
                   ),
                 ),
                 direction: DismissDirection.endToStart,
-                onDismissed: (direction) {
-                },
+                onDismissed: (direction) {},
                 background: Card(
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
+                    children: const [
                       Icon(
                         Icons.delete,
                         size: 50,

@@ -32,15 +32,15 @@ class _ProductViewState extends State<ProductView> {
 
     return GridView.builder(
       itemCount: valid.length,
-      padding: EdgeInsets.all(5),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+      padding: const EdgeInsets.all(5),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
       itemBuilder: (context, index) {
         return ClipRRect(
-          borderRadius: BorderRadius.all(Radius.circular(15)),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
           child: GestureDetector(
             onTap: () => Navigator.of(context)
                 .pushNamed(ShopItem.route, arguments: valid[index]),
@@ -53,7 +53,7 @@ class _ProductViewState extends State<ProductView> {
                 child: GridTileBar(
                   leading: valid[index].isFavorite
                       ? IconButton(
-                          icon: Icon(Icons.favorite),
+                          icon: const Icon(Icons.favorite),
                           onPressed: () {
                             setState(() {
                               productManager.setProductAsFavorite(valid[index],
@@ -62,7 +62,7 @@ class _ProductViewState extends State<ProductView> {
                           },
                         )
                       : IconButton(
-                          icon: Icon(Icons.favorite_border),
+                          icon: const Icon(Icons.favorite_border),
                           onPressed: () {
                             setState(() {
                               productManager.setProductAsFavorite(valid[index]);
@@ -74,7 +74,7 @@ class _ProductViewState extends State<ProductView> {
                     valid[index].name,
                   ),
                   trailing: IconButton(
-                    icon: Icon(Icons.shopping_cart),
+                    icon: const Icon(Icons.shopping_cart),
                     onPressed: () {
                       shoppingCartManager.addToCart(valid[index]);
                       ScaffoldMessenger.of(context).showSnackBar(

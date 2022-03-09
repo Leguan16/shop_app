@@ -25,19 +25,19 @@ class _ShopPageState extends State<ShopPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Products"),
+        title: const Text("Products"),
         actions: [
           PopupMenuButton(
-            icon: Icon(Icons.more_vert),
+            icon: const Icon(Icons.more_vert),
             itemBuilder: (context) => [
               PopupMenuItem(
-                child: Text("Show Favorites"),
+                child: const Text("Show Favorites"),
                 onTap: () => setState(() {
                   ShopPage.favOnly = true;
                 }),
               ),
               PopupMenuItem(
-                child: Text("Show All"),
+                child: const Text("Show All"),
                 onTap: () => setState(() {
                   ShopPage.favOnly = false;
                 }),
@@ -50,7 +50,7 @@ class _ShopPageState extends State<ShopPage> {
                 Text(shoppingCartManager.getItems().length.toString()),
             showBadge: shoppingCartManager.getItems().isNotEmpty,
             child: IconButton(
-              icon: Icon(Icons.shopping_cart),
+              icon: const Icon(Icons.shopping_cart),
               onPressed: () =>
                   Navigator.of(context).pushNamed(ShoppingCart.route),
             ),
@@ -58,7 +58,7 @@ class _ShopPageState extends State<ShopPage> {
         ],
       ),
       drawer: ShopDrawer(),
-      body: ProductView(),
+      body: const ProductView(),
     );
   }
 }

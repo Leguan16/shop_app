@@ -15,21 +15,21 @@ class ShopItem extends StatelessWidget {
         body: Column(
           children: [
             Image.network(product.imageUrl),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               "€" + product.price.toString(),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 20,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Text(
               product.description,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 15,
               ),
             )

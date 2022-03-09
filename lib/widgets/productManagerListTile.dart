@@ -22,11 +22,11 @@ class ProductManagerListTile extends StatelessWidget {
         spacing: 12,
         children: <Widget>[
           IconButton(
-            icon: Icon(Icons.edit),
+            icon: const Icon(Icons.edit),
             onPressed: () {Navigator.of(context).pushNamed(ProductAddPage.route, arguments: product);},
           ),
           IconButton(
-            icon: Icon(Icons.delete, color: Colors.red,),
+            icon: const Icon(Icons.delete, color: Colors.red,),
             onPressed: () {
               productManager.removeProduct(product);
             },

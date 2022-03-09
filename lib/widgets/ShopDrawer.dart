@@ -9,18 +9,18 @@ class ShopDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     List<ListTile> drawerContent = [
       ListTile(
-        leading: Icon(Icons.shop),
-        title: Text("Shop"),
+        leading: const Icon(Icons.shop),
+        title: const Text("Shop"),
         onTap: () => Navigator.of(context).pushReplacementNamed("/"),
       ),
       ListTile(
-        leading: Icon(Icons.credit_card),
-        title: Text('Orders'),
+        leading: const Icon(Icons.credit_card),
+        title: const Text('Orders'),
         onTap: () => Navigator.of(context).pushReplacementNamed(OrderPage.route),
       ),
       ListTile(
-        leading: Icon(Icons.edit),
-        title: Text('Manage Producs'),
+        leading: const Icon(Icons.edit),
+        title: const Text('Manage Producs'),
         onTap: () => Navigator.of(context).pushReplacementNamed(ProductManagerPage.route),
       )
     ];
@@ -30,7 +30,7 @@ class ShopDrawer extends StatelessWidget {
           itemBuilder: (context, index) {
             return drawerContent[index];
           },
-          separatorBuilder: (context, index) => Divider(
+          separatorBuilder: (context, index) => const Divider(
                 color: Colors.grey,
               ),
           itemCount: drawerContent.length),

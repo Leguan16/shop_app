@@ -16,19 +16,19 @@ class ProductManagerPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Products"),
+        title: const Text("Products"),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.of(context).pushNamed(ProductAddPage.route/*, arguments: Product("", 0, "", "")*/);
             },
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
           )
         ],
       ),
       drawer: ShopDrawer(),
       body: ListView.separated(
-        separatorBuilder: (context, index) => Divider(
+        separatorBuilder: (context, index) => const Divider(
           color: Colors.grey,
         ),
         itemCount: productManager.getProducts().length,

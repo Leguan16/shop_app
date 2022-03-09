@@ -15,7 +15,7 @@ class OrderPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Orders"),
+        title: const Text("Orders"),
       ),
       drawer: ShopDrawer(),
       body: ListView.builder(
