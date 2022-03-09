@@ -35,7 +35,11 @@ class ShoppingCartManager with ChangeNotifier {
 
     if (index != -1) {
       var item = _items.removeAt(index);
-      _items.add(ShoppingCartItem(product, item.count - 1));
+      if (item.count == 1) {
+        removeAllFromCart(product);
+      } else {
+        _items.add(ShoppingCartItem(product, item.count - 1));
+      }
     }
     notifyListeners();
   }
@@ -51,5 +55,10 @@ class ShoppingCartManager with ChangeNotifier {
 
   List<ShoppingCartItem> getItems() {
     return [..._items];
+  }
+
+  void clear() {
+    _items.clear();
+    notifyListeners();
   }
 }

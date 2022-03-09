@@ -10,7 +10,7 @@ class OrderManager with ChangeNotifier {
     notifyListeners();
   }
 
-  List<Order> getItems() {
+  List<Order> getOrders() {
     return [..._orders];
   }
 

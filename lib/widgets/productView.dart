@@ -23,8 +23,11 @@ class _ProductViewState extends State<ProductView> {
     final ShoppingCartManager shoppingCartManager =
         Provider.of<ShoppingCartManager>(context);
 
-    if(ShopPage.favOnly) {
-      valid = productManager.getProducts().where((element) => element.isFavorite == true).toList();
+    if (ShopPage.favOnly) {
+      valid = productManager
+          .getProducts()
+          .where((element) => element.isFavorite == true)
+          .toList();
     }
 
     return GridView.builder(
@@ -32,10 +35,9 @@ class _ProductViewState extends State<ProductView> {
       gridDelegate:
           SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
       itemBuilder: (context, index) {
-
         return GestureDetector(
-          onTap: () => Navigator.of(context).pushNamed(ShopItem.route,
-              arguments: valid[index]),
+          onTap: () => Navigator.of(context)
+              .pushNamed(ShopItem.route, arguments: valid[index]),
           child: GridTile(
             child: Image.network(
               valid[index].imageUrl,
@@ -48,8 +50,7 @@ class _ProductViewState extends State<ProductView> {
                         icon: Icon(Icons.favorite),
                         onPressed: () {
                           setState(() {
-                            productManager.setProductAsFavorite(
-                                valid[index],
+                            productManager.setProductAsFavorite(valid[index],
                                 favorite: false);
                           });
                         },
@@ -58,8 +59,7 @@ class _ProductViewState extends State<ProductView> {
                         icon: Icon(Icons.favorite_border),
                         onPressed: () {
                           setState(() {
-                            productManager.setProductAsFavorite(
-                                valid[index]);
+                            productManager.setProductAsFavorite(valid[index]);
                           });
                         },
                       ),
@@ -70,8 +70,15 @@ class _ProductViewState extends State<ProductView> {
                 trailing: IconButton(
                   icon: Icon(Icons.shopping_cart),
                   onPressed: () {
-                    shoppingCartManager
-                        .addToCart(valid[index]);
+                    shoppingCartManager.addToCart(valid[index]);
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(valid[index].name + " added"),
+                        action: SnackBarAction(label: "Undo", onPressed: () {
+                          shoppingCartManager.removeOneFromCart(valid[index]);
+                        },)
+                      ),
+                    );
                   },
                 ),
               ),
