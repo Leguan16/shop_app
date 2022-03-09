@@ -11,17 +11,17 @@ class ShopDrawer extends StatelessWidget {
       ListTile(
         leading: Icon(Icons.shop),
         title: Text("Shop"),
-        onTap: () => Navigator.of(context).popAndPushNamed("/"),
+        onTap: () => Navigator.of(context).pushReplacementNamed("/"),
       ),
       ListTile(
         leading: Icon(Icons.credit_card),
         title: Text('Orders'),
-        onTap: () => Navigator.of(context).popAndPushNamed(OrderPage.route),
+        onTap: () => Navigator.of(context).pushReplacementNamed(OrderPage.route),
       ),
       ListTile(
         leading: Icon(Icons.edit),
         title: Text('Manage Producs'),
-        onTap: () => Navigator.of(context).popAndPushNamed(ProductManagerPage.route),
+        onTap: () => Navigator.of(context).pushReplacementNamed(ProductManagerPage.route),
       )
     ];
 

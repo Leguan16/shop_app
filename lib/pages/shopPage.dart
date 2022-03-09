@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:shop_app/pages/shoppingCartPage.dart';
 import 'package:shop_app/widgets/ShopDrawer.dart';
 import 'package:shop_app/widgets/productView.dart';
 import 'package:shop_app/widgets/shopItem.dart';
@@ -25,7 +26,7 @@ class ShopPage extends StatelessWidget {
             showBadge: shoppingCart.isNotEmpty,
             child: IconButton(
               icon: Icon(Icons.shopping_cart),
-              onPressed: () {},
+              onPressed: () => Navigator.of(context).pushNamed(ShoppingCart.route),
             ),
           ),
         ],

@@ -7,8 +7,7 @@ class ProductManager with ChangeNotifier {
         "Mouse",
         20.0,
         "https://media.discordapp.net/attachments/946476628492570624/946476760457965628/unknown.png?width=1214&height=683",
-        "Mouse description",
-        "products/mouse"),
+        "Mouse description"),
   ];
 
   addProduct(Product product) {
