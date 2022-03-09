@@ -32,54 +32,64 @@ class _ProductViewState extends State<ProductView> {
 
     return GridView.builder(
       itemCount: valid.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+      padding: EdgeInsets.all(5),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+      ),
       itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () => Navigator.of(context)
-              .pushNamed(ShopItem.route, arguments: valid[index]),
-          child: GridTile(
-            child: Image.network(
-              valid[index].imageUrl,
-            ),
-            footer: Opacity(
-              opacity: 0.75,
-              child: GridTileBar(
-                leading: valid[index].isFavorite
-                    ? IconButton(
-                        icon: Icon(Icons.favorite),
-                        onPressed: () {
-                          setState(() {
-                            productManager.setProductAsFavorite(valid[index],
-                                favorite: false);
-                          });
-                        },
-                      )
-                    : IconButton(
-                        icon: Icon(Icons.favorite_border),
-                        onPressed: () {
-                          setState(() {
-                            productManager.setProductAsFavorite(valid[index]);
-                          });
-                        },
-                      ),
-                backgroundColor: Colors.black,
-                title: Text(
-                  valid[index].name,
-                ),
-                trailing: IconButton(
-                  icon: Icon(Icons.shopping_cart),
-                  onPressed: () {
-                    shoppingCartManager.addToCart(valid[index]);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(valid[index].name + " added"),
-                        action: SnackBarAction(label: "Undo", onPressed: () {
-                          shoppingCartManager.removeOneFromCart(valid[index]);
-                        },)
-                      ),
-                    );
-                  },
+        return ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(15)),
+          child: GestureDetector(
+            onTap: () => Navigator.of(context)
+                .pushNamed(ShopItem.route, arguments: valid[index]),
+            child: GridTile(
+              child: Image.network(
+                valid[index].imageUrl,
+              ),
+              footer: Opacity(
+                opacity: 0.75,
+                child: GridTileBar(
+                  leading: valid[index].isFavorite
+                      ? IconButton(
+                          icon: Icon(Icons.favorite),
+                          onPressed: () {
+                            setState(() {
+                              productManager.setProductAsFavorite(valid[index],
+                                  favorite: false);
+                            });
+                          },
+                        )
+                      : IconButton(
+                          icon: Icon(Icons.favorite_border),
+                          onPressed: () {
+                            setState(() {
+                              productManager.setProductAsFavorite(valid[index]);
+                            });
+                          },
+                        ),
+                  backgroundColor: Colors.black,
+                  title: Text(
+                    valid[index].name,
+                  ),
+                  trailing: IconButton(
+                    icon: Icon(Icons.shopping_cart),
+                    onPressed: () {
+                      shoppingCartManager.addToCart(valid[index]);
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                            content: Text(valid[index].name + " added"),
+                            action: SnackBarAction(
+                              label: "Undo",
+                              onPressed: () {
+                                shoppingCartManager
+                                    .removeOneFromCart(valid[index]);
+                              },
+                            )),
+                      );
+                    },
+                  ),
                 ),
               ),
             ),

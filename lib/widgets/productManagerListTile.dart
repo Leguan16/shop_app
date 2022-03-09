@@ -26,7 +26,7 @@ class ProductManagerListTile extends StatelessWidget {
             onPressed: () {Navigator.of(context).pushNamed(ProductAddPage.route, arguments: product);},
           ),
           IconButton(
-            icon: Icon(Icons.delete),
+            icon: Icon(Icons.delete, color: Colors.red,),
             onPressed: () {
               productManager.removeProduct(product);
             },

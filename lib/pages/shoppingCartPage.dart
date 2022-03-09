@@ -29,18 +29,18 @@ class ShoppingCart extends StatelessWidget {
             elevation: 12,
             child: Row(
               children: [
-                Text("Total"),
+                Text("Total", style: TextStyle(fontSize: 20),),
                 SizedBox(
-                  width: 200,
+                  width: 150,
                 ),
                 Badge(
                   toAnimate: false,
                   shape: BadgeShape.square,
                   badgeColor: Colors.blue,
                   borderRadius: BorderRadius.circular(15),
-                  badgeContent: Text(
+                  badgeContent: Text( "€" +
                       shoppingCartManager.getTotalPrice().toString(),
-                      style: TextStyle(color: Colors.white)),
+                      style: TextStyle(color: Colors.white, fontSize: 15)),
                 ),
                 TextButton(
                     onPressed: () {
@@ -50,7 +50,7 @@ class ShoppingCart extends StatelessWidget {
                         shoppingCartManager.clear();
                       }
                     },
-                    child: Text("ORDER NOW"))
+                    child: Text("ORDER NOW", style: TextStyle(fontSize: 15)))
               ],
             ),
           ),
