@@ -7,7 +7,7 @@ import 'package:shop_app/widgets/ShopDrawer.dart';
 import 'package:shop_app/widgets/productView.dart';
 
 class ShopPage extends StatefulWidget {
-  ShopPage({Key? key}) : super(key: key);
+  const ShopPage({Key? key}) : super(key: key);
 
   static bool favOnly = false;
 

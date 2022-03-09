@@ -15,6 +15,7 @@ class ShoppingCartManager with ChangeNotifier {
       var item = _items.removeAt(index);
       _items.add(ShoppingCartItem(product, item.count + 1));
     }
+    notifyListeners();
   }
 
    removeFromCart(Product product) {
@@ -25,6 +26,7 @@ class ShoppingCartManager with ChangeNotifier {
       var item = _items.removeAt(index);
       _items.add(ShoppingCartItem(product, item.count - 1));
     }
+    notifyListeners();
   }
 
   double getTotalPrice() {

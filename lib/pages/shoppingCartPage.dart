@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:shop_app/providers/shoppingCartManager.dart';
 
 class ShoppingCart extends StatelessWidget {
-  ShoppingCart({Key? key}) : super(key: key);
+  const ShoppingCart({Key? key}) : super(key: key);
 
   static const route = "/cart";
 
@@ -40,9 +40,12 @@ class ShoppingCart extends StatelessWidget {
             ),
           ),
           ListView.builder(
+            shrinkWrap: true,
             itemCount: shoppingCartManager.getItems().length,
             itemBuilder: (context, index) {
-              return ListTile();
+              return ListTile(
+                title: Text("HAHA"),
+              );
             },
           )
         ],
