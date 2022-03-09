@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_app/domain/product.dart';
 import 'package:shop_app/pages/productAddPage.dart';
 import 'package:shop_app/providers/productManager.dart';
 import 'package:shop_app/widgets/ShopDrawer.dart';
@@ -21,7 +20,7 @@ class ProductManagerPage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.of(context).pushNamed(ProductAddPage.route, arguments: Product("", 0, "", ""));
+              Navigator.of(context).pushNamed(ProductAddPage.route/*, arguments: Product("", 0, "", "")*/);
             },
             icon: Icon(Icons.add),
           )

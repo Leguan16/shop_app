@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/domain/product.dart';
 import 'package:shop_app/providers/productManager.dart';
 
 class ProductAddPage extends StatefulWidget {
-  ProductAddPage({Key? key}) : super(key: key);
+  const ProductAddPage({Key? key}) : super(key: key);
 
   static const route = "/product_manager/add";
 
@@ -16,17 +15,24 @@ class ProductAddPage extends StatefulWidget {
 class _ProductAddPageState extends State<ProductAddPage> {
   final _formKey = GlobalKey<FormState>();
 
-  final imageUrlController = TextEditingController();
-  final titleController = TextEditingController();
-  final priceController = TextEditingController();
-  final descriptionController = TextEditingController();
+  String title = "";
+  String description = "";
+  String imageURL = "";
 
   late double price;
 
+  Product? product;
+
   @override
   Widget build(BuildContext context) {
-
-    final product = ModalRoute.of(context)!.settings.arguments as Product;
+    try {
+      product = ModalRoute.of(context)!.settings.arguments as Product;
+      //if(product != null) {
+        imageURL = product!.imageUrl;
+      //}
+    } on Error {
+      product = null;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -39,15 +45,16 @@ class _ProductAddPageState extends State<ProductAddPage> {
         child: ListView(
           children: [
             TextFormField(
+              initialValue: product == null ? "" : product?.name,
               validator: validateText,
-              controller: titleController,
               decoration: InputDecoration(
                 hintText: "Enter a title",
                 labelText: "Title",
               ),
+              onSaved: (newValue) => title = newValue!,
             ),
             TextFormField(
-              controller: priceController,
+              initialValue: product == null ? "" : product?.price.toString(),
               validator: validatePrice,
               decoration: InputDecoration(
                 hintText: "Enter a price",
@@ -56,12 +63,13 @@ class _ProductAddPageState extends State<ProductAddPage> {
               keyboardType: TextInputType.number,
             ),
             TextFormField(
-              controller: descriptionController,
+              initialValue: product == null ? "" : product?.description,
               validator: validateText,
               decoration: InputDecoration(
                 hintText: "Enter a description",
                 labelText: "Description",
               ),
+              onSaved: (newValue) => description = newValue!,
             ),
             Row(
               children: [
@@ -72,10 +80,10 @@ class _ProductAddPageState extends State<ProductAddPage> {
                         width: 100,
                         decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey)),
-                        child: imageUrlController.text.isEmpty
+                        child: imageURL.isEmpty
                             ? Text("enter img URL")
                             : Image.network(
-                                imageUrlController.text,
+                                imageURL,
                                 errorBuilder: (context, error, stackTrace) =>
                                     Text("Invalid URL"),
                               )),
@@ -86,13 +94,16 @@ class _ProductAddPageState extends State<ProductAddPage> {
                 ),
                 Expanded(
                   child: TextFormField(
+                    initialValue: product == null ? "" : product?.imageUrl,
                     validator: validateText,
-                    controller: imageUrlController,
-                    onChanged: (value) => setState(() {}),
+                    onChanged: (value) => setState(() {
+                      imageURL = value;
+                    }),
                     decoration: InputDecoration(
                       hintText: "Enter a image URL",
                       labelText: "Image URL",
                     ),
+                    onSaved: (newValue) => imageURL = newValue!,
                   ),
                 ),
               ],
@@ -104,12 +115,15 @@ class _ProductAddPageState extends State<ProductAddPage> {
   }
 
   submit() {
+    ProductManager productManager =
+        Provider.of<ProductManager>(context, listen: false);
     if (_formKey.currentState!.validate()) {
-      Provider.of<ProductManager>(context, listen: false).addProduct(Product(
-          titleController.text,
-          price,
-          imageUrlController.text,
-          descriptionController.text));
+      _formKey.currentState!.save();
+      if (productManager.getProducts().contains(product)) {
+        productManager.removeProduct(product!);
+      }
+
+      productManager.addProduct(Product(title, price, imageURL, description));
       Navigator.of(context).pop();
     }
   }

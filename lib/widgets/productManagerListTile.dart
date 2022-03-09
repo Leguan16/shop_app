@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/domain/product.dart';
+import 'package:shop_app/pages/productAddPage.dart';
 import 'package:shop_app/providers/productManager.dart';
 
 class ProductManagerListTile extends StatelessWidget {
@@ -22,7 +23,7 @@ class ProductManagerListTile extends StatelessWidget {
         children: <Widget>[
           IconButton(
             icon: Icon(Icons.edit),
-            onPressed: () {},
+            onPressed: () {Navigator.of(context).pushNamed(ProductAddPage.route, arguments: product);},
           ),
           IconButton(
             icon: Icon(Icons.delete),

@@ -31,7 +31,7 @@ class _ShopPageState extends State<ShopPage> {
             icon: Icon(Icons.more_vert),
             itemBuilder: (context) => [
               PopupMenuItem(
-                child: Text("Show Favourites"),
+                child: Text("Show Favorites"),
                 onTap: () => setState(() {
                   ShopPage.favOnly = true;
                 }),
