@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:shop_app/domain/order.dart';
 
 class OrderManager with ChangeNotifier {
@@ -11,7 +11,6 @@ class OrderManager with ChangeNotifier {
   }
 
   List<Order> getOrders() {
-    return [..._orders];
+    return [..._orders.reversed];
   }
-
 }
