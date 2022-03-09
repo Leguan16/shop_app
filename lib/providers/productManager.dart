@@ -19,7 +19,7 @@ class ProductManager with ChangeNotifier {
       "House",
       23,
       "https://media.discordapp.net/attachments/548926343421886464/951253588603191306/IMG_8349.jpg?width=512&height=683",
-      "i don't know yet"
+      "sometimes clicks by itself"
     )
   ];
 
