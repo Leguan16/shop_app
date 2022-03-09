@@ -25,6 +25,9 @@ class _ProductAddPageState extends State<ProductAddPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    final product = ModalRoute.of(context)!.settings.arguments as Product;
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Edit Product"),
@@ -107,6 +110,7 @@ class _ProductAddPageState extends State<ProductAddPage> {
           price,
           imageUrlController.text,
           descriptionController.text));
+      Navigator.of(context).pop();
     }
   }
 

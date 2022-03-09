@@ -6,6 +6,7 @@ import 'package:shop_app/pages/productManagerPage.dart';
 import 'package:shop_app/pages/shopPage.dart';
 import 'package:shop_app/pages/shoppingCartPage.dart';
 import 'package:shop_app/providers/productManager.dart';
+import 'package:shop_app/providers/shoppingCartManager.dart';
 import 'package:shop_app/widgets/shopItem.dart';
 
 void main() {
@@ -17,10 +18,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) {
-        return ProductManager();
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ProductManager>(create: (_) => ProductManager(),),
+        ChangeNotifierProvider<ShoppingCartManager>(create: (_) => ShoppingCartManager(),)
+      ],
       child: MaterialApp(
         initialRoute: '/',
         routes: {
