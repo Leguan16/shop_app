@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop_app/domain/product.dart';
-import 'package:shop_app/pages/shopPage.dart';
 import 'package:shop_app/providers/productManager.dart';
 import 'package:shop_app/providers/shoppingCartManager.dart';
 import 'package:shop_app/widgets/shopItem.dart';
 
 class ProductView extends StatefulWidget {
-  const ProductView({Key? key}) : super(key: key);
+
+   bool favOnly;
+
+   ProductView(this.favOnly, {Key? key}) : super(key: key);
 
   @override
   State<ProductView> createState() => _ProductViewState();
@@ -23,7 +25,7 @@ class _ProductViewState extends State<ProductView> {
     final ShoppingCartManager shoppingCartManager =
         Provider.of<ShoppingCartManager>(context);
 
-    if (ShopPage.favOnly) {
+    if (widget.favOnly) {
       valid = productManager
           .getProducts()
           .where((element) => element.isFavorite == true)

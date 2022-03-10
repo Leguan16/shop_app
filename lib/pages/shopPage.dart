@@ -9,14 +9,13 @@ import 'package:shop_app/widgets/productView.dart';
 class ShopPage extends StatefulWidget {
   const ShopPage({Key? key}) : super(key: key);
 
-  static bool favOnly = false;
-
   @override
   State<ShopPage> createState() => _ShopPageState();
 }
 
 class _ShopPageState extends State<ShopPage> {
 
+  bool favOnly = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,13 +32,13 @@ class _ShopPageState extends State<ShopPage> {
               PopupMenuItem(
                 child: const Text("Show Favorites"),
                 onTap: () => setState(() {
-                  ShopPage.favOnly = true;
+                  favOnly = true;
                 }),
               ),
               PopupMenuItem(
                 child: const Text("Show All"),
                 onTap: () => setState(() {
-                  ShopPage.favOnly = false;
+                 favOnly = false;
                 }),
               ),
             ],
@@ -58,7 +57,7 @@ class _ShopPageState extends State<ShopPage> {
         ],
       ),
       drawer: ShopDrawer(),
-      body: const ProductView(),
+      body: ProductView(favOnly),
     );
   }
 }
